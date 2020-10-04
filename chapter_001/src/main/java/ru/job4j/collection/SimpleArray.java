@@ -24,13 +24,12 @@ public class SimpleArray<T> implements Iterable<T> {
         this.modCount++;
     }
 
-
     @Override
     public Iterator<T> iterator() {
         return new Iterator<>() {
             private final Object[] array = objects;
             private int index = 0;
-            private int expectedModCount = modCount;
+            private final int expectedModCount = modCount;
 
             @Override
             public boolean hasNext() {
@@ -45,6 +44,7 @@ public class SimpleArray<T> implements Iterable<T> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
+
                 return (T) array[index++];
             }
         };
