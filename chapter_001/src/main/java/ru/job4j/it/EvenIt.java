@@ -7,21 +7,21 @@ public class EvenIt implements Iterator<Integer> {
     private final int[] data;
     int value = 0;
 
-
     public EvenIt(int[] data) {
         this.data = data;
     }
 
     @Override
     public boolean hasNext() {
-        while (data[value] % 2 != 0) {
-            value++;
-            if (value >= data.length) {
-                value = data.length - 1;
-                return false;
+        boolean rsl = false;
+        while (value < data.length) {
+            if (data[value] % 2 == 0) {
+                rsl = true;
+                break;
             }
+            value++;
         }
-        return true;
+        return rsl;
     }
 
     @Override
