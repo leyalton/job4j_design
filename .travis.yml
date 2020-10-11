@@ -1,0 +1,10 @@
+language: java
+jdk:
+  - openjdk14
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+env:
+  global:
+    - CODECOV_TOKEN="78151455-76e2-43dc-a57e-f26074582515"
