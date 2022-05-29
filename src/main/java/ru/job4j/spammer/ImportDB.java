@@ -6,7 +6,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -23,16 +22,13 @@ public class ImportDB {
     public List<User> load() throws IOException {
         List<User> users = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
-            // rd.lines().map(a -> a.split(";")).forEach(a -> users.add(new User(a[0], a[1])));
             String line;
             while ((line = rd.readLine()) != null) {
                 String[] a = line.split(";");
-                //System.out.println(Arrays.toString(a));
                 if (a.length != 2 || a[0].equals("") || a[1].equals("")) {
                     throw new IllegalArgumentException("Parameter cannot be null");
                 } else {
                     users.add(new User(a[0], a[1]));
-                    //System.out.println(a.length);
                 }
             }
 
