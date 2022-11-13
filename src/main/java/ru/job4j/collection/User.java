@@ -18,11 +18,17 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof User)) {
+            return false;
+        }
         User user = (User) o;
-        return children == user.children &&
-                Objects.equals(name, user.name) &&
+        return children == user.children
+                &&
+                Objects.equals(name, user.name)
+                &&
                 Objects.equals(birthday, user.birthday);
     }
 
@@ -33,9 +39,12 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", children=" + children +
+        return "User{"
+                +
+                "name='" + name + '\''
+                +
+                ", children=" + children
+                +
                 '}';
     }
 
@@ -53,21 +62,13 @@ public class User {
         int hash2 = hashCode2 ^ (hashCode2 >>> 16);
         int bucket2 = hash2 & 15;
 
-        User user3 = new User("123", 21, birthday);
-        int hashCode3 = user3.hashCode();
-        int hash3 = hashCode3 ^ (hashCode3 >>> 16);
-        int bucket3 = hash3 & 15;
-
         map.put(user1, new Object());
         map.put(user2, new Object());
-        map.put(user3, new Object());
 
         System.out.printf("user1 - хешкод: %s, хеш: %s, бакет: %s, \n",
                 hashCode1, hash1, bucket1);
         System.out.printf("user2 - хешкод: %s, хеш: %s, бакет: %s, \n",
                 hashCode2, hash2, bucket2);
-        System.out.printf("user3 - хешкод: %s, хеш: %s, бакет: %s, \n",
-                hashCode3, hash3, bucket3);
 
         map.forEach((key, value) -> System.out.println(key + " --- " + value));
     }
