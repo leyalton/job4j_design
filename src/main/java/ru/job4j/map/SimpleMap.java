@@ -31,7 +31,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
         return hashCode ^ (hashCode >>> 16);
     }
 
-    public int getIndex(K key) {
+    private int getIndex(K key) {
         return indexFor(hash(Objects.hashCode(key)));
     }
 
@@ -63,11 +63,16 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 Objects.equals(key, table[index].key)) ? table[index].value : null;
     }
 
+
+    private boolean isKeyEqual(K key, int index) {
+        return table[index] != null && Objects.hashCode(key) == Objects.hashCode(table[index].key) && Objects.equals(key, table[index].key);
+    }
+
     @Override
     public boolean remove(K key) {
         boolean result = false;
         int index = getIndex(key);
-        if (table[index] != null && Objects.hashCode(key) == Objects.hashCode(table[index].key) && Objects.equals(key, table[index].key)) {
+        if (isKeyEqual(key, index)) {
             table[index] = null;
             count--;
             modCount++;
